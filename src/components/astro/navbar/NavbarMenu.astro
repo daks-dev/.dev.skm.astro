@@ -1,0 +1,85 @@
+---
+import { twMerge } from '@daks.dev/astro.sdk';
+import { NavbarDropdown, Link } from '@daks.dev/astro.sdk/astro';
+import type { HTMLAttributes } from 'astro/types';
+import type { NavItem } from '@daks.dev/astro.sdk';
+
+interface Props extends Omit<HTMLAttributes<'div'>, 'class' | 'aria-owns'> {
+  items: NavItem[];
+  class?: ClassValue;
+  custom?: Record<string, ClassValue>;
+}
+
+const { items, class: className, custom = {}, ...props } = Astro.props;
+---
+
+<slot name='before' />
+<div
+  id='app-navbar-menu'
+  class:list={[
+    'max-bp:inert:hidden',
+    'absolute inset-x-0 top-(--navbar-height) max-h--screen-navbar',
+    'bp:contents',
+    'overflow-y-auto'
+    // 'shadow shadow-neutral-400 dark:shadow-neutral-900'
+  ]}
+  inert
+  aria-owns='app-navbar-menu-toggle'>
+  <div
+    role='menu'
+    class={twMerge(
+      'relative',
+      'my-1 h-8 px-3 max-bp:py-2',
+      'flex max-bp:flex-col bp:gap-x-4',
+      'text-base/relaxed font-normal bp:leading-none',
+      'max-bp:bg-theme-frame',
+      'bg-white/90 backdrop-blur-sm dark:bg-zinc-800/90',
+      'rounded-full ring-1 ring-zinc-900/10 dark:ring-white/10',
+      'shadow-lg shadow-zinc-800/10 dark:shadow-black/30',
+      custom.menu,
+      className
+    )}
+    {...props}>
+    {
+      items.map(({ class: className, ...item }) => {
+        item.role ??= 'menuitem';
+        item.itemprop ??= item.href && 'relatedLink';
+        return (
+          <Link
+            class:list={['inner', className]}
+            {...item}
+          />
+        );
+      })
+    }
+  </div>
+  <slot />
+</div>
+<slot name='after' />
+
+<style scoped>
+  @reference "@styles/global.css";
+
+  .inner {
+    @apply relative;
+    @apply px-3 py-2;
+    @apply flex items-center;
+    @apply text-sm;
+    @apply text-zinc-800 hover:text-theme-link-hover dark:text-zinc-200;
+  }
+  .inner[aria-current='page'] {
+    @apply text-teal-500 dark:text-teal-400;
+    &::after {
+      @apply content-empty;
+      @apply absolute inset-x-1 -bottom-px h-px;
+      @apply bg-linear-to-r from-teal-500/0 via-teal-500/40 to-teal-500/0 dark:from-teal-400/0 dark:via-teal-400/40 dark:to-teal-400/0;
+    }
+  }
+
+  /*
+  .outer {
+    @apply flex p-2;
+    @apply transition-easy;
+  }
+  */
+</style>

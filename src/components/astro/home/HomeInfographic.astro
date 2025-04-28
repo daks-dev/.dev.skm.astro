@@ -1,0 +1,103 @@
+---
+import { getImage } from 'astro:assets';
+import { getEntry } from 'astro:content';
+import { twMerge } from '@daks.dev/astro.sdk';
+import { Figure } from '@daks.dev/astro.sdk/astro';
+
+interface Props {
+  class?: ClassValue;
+}
+
+const { class: className } = Astro.props;
+
+const data = (await getEntry('gallery', 'home'))?.data ?? [];
+const infographic = await Promise.all(
+  data.map(async (x) => ({
+    src: await getImage({
+      src: x.src,
+      width: 144,
+      fit: 'contain',
+      quality: 80
+    }),
+    alt: x.alt,
+    caption: x.caption,
+    max: x.max
+  }))
+);
+---
+
+<app-home-infographic class={twMerge('flex flex-wrap justify-around gap-8', className)}>
+  {
+    infographic.map((x) => (
+      <Figure
+        src={x.src}
+        class='flex flex-col items-center gap-4'
+        custom={{
+          img: ['p-7', 'bg-slate-600 dark:bg-transparent', 'rounded-lg'],
+          caption: 'items-center gap-2',
+          title: ['order-none', 'font-normal', 'text-zinc-600 dark:text-zinc-300'],
+          count: ['order-first', 'text-4xl font-bold', 'text-zinc-500 dark:text-zinc-400']
+        }}
+        img={{
+          style: 'opacity:.25'
+        }}
+        alt={x.alt || x.caption?.title.toLowerCase()}
+        caption={x.caption}
+        data-max={x.max}
+        eager
+      />
+    ))
+  }
+</app-home-infographic>
+
+<script>
+  type Info = {
+    image: HTMLImageElement;
+    count: HTMLSpanElement;
+    val: number;
+    max: number;
+    inteval?: ReturnType<typeof setInterval>;
+  };
+
+  class AppHomeInfographic extends HTMLElement {
+    readonly duration = 3000;
+    info: Info[] = [];
+    max = 0;
+
+    constructor() {
+      super();
+      this.querySelectorAll('figure').forEach((e) => {
+        const max = Number(e.dataset.max);
+        if (max > this.max) this.max = max;
+        this.info.push({
+          image: e.querySelector('img')!,
+          count: e.querySelector('span')!,
+          val: 0,
+          max
+        });
+      });
+    }
+
+    connectedCallback() {
+      this.info.forEach((x, idx) => setTimeout(() => this.render(x), 500 + 500 * idx));
+    }
+
+    disconnectedCallback() {
+      this.info.forEach((x) => clearInterval(x.inteval));
+    }
+
+    render = (x: Info) => {
+      const step = this.duration / this.max;
+      x.inteval = setInterval(() => {
+        if (x.max - x.val >= x.max / step) x.val += x.max / step;
+        else {
+          x.val = x.max;
+          x.image.style.opacity = '';
+          clearInterval(x.inteval);
+        }
+        x.count.innerText = x.val.toFixed();
+      }, step);
+    };
+  }
+  customElements.define('app-home-infographic', AppHomeInfographic);
+</script>

@@ -1,0 +1,2 @@
+@custom-variant scrolled-up (&.scrolled-up, .scrolled-up &);
+@custom-variant sidebar (&.sidebar, .sidebar &);

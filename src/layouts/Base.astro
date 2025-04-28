@@ -1,0 +1,110 @@
+---
+import { DEV } from 'esm-env';
+import { ClientRouter } from 'astro:transitions';
+import { twMerge } from '@daks.dev/astro.sdk';
+import { Head, YandexMetrika, YandexMetrikaHit } from '@daks.dev/astro.sdk/astro';
+import { Navbar, /*Sidebar,*/ Footer } from '@components/astro';
+import type { HTMLAttributes } from 'astro/types';
+
+import '@assets/fonts/roboto/cyrillic.css';
+
+import '@styles/global.css';
+
+interface Props extends Omit<HTMLAttributes<'div'>, 'class' | 'title'> {
+  schema?: string;
+  class?: ClassValue;
+  title: string;
+  description: string;
+  robots?: string;
+  noMetrika?: boolean;
+  noPwa?: boolean;
+}
+
+const {
+  schema = 'WebPage',
+  class: className,
+  title,
+  description,
+  robots,
+  noMetrika = DEV,
+  noPwa,
+  ...props
+} = Astro.props;
+
+import { app, seo } from '@app/configs';
+const {
+  yandex: { counter }
+} = seo;
+
+const fonts: string[] = Object.values(
+  import.meta.glob('@assets/fonts/roboto/*.woff2', {
+    query: '?url',
+    eager: true,
+    import: 'default'
+  })
+);
+---
+
+<html
+  lang='en'
+  class='theme-dark'>
+  <head>
+    <Head
+      {title}
+      {description}
+      {robots}
+      {app}
+      rss='/rss.xml'>
+      <Fragment slot='preload'>
+        {
+          fonts.map((x) => (
+            <link
+              rel='preload'
+              href={x}
+              as='font'
+              type='font/woff2'
+              crossorigin
+              transition:persist
+            />
+          ))
+        }
+      </Fragment>
+    </Head>
+    <ClientRouter />
+  </head>
+
+  <body
+    class:list={['text-zinc-800 dark:text-zinc-100', 'bg-zinc-50 dark:bg-zinc-950']}
+    itemscope
+    itemtype={`https://schema.org/${schema}`}>
+    <div class:list={['fixed inset-0', 'flex justify-center', 'sm:px-8']}>
+      <div
+        class:list={[
+          'wrapper-xl',
+          'bg-white dark:bg-zinc-900',
+          'ring-1 ring-zinc-200/70 dark:ring-zinc-300/20'
+        ]}>
+      </div>
+    </div>
+    <div
+      class={twMerge('relative', 'min-h-screen', 'flex flex-col', className)}
+      {...props}>
+      <slot />
+      <Navbar />
+      {/*<Sidebar />*/}
+      <Footer />
+    </div>
+    {
+      !noMetrika && (
+        <>
+          <YandexMetrika {counter} />
+          <YandexMetrikaHit
+            {counter}
+            {title}
+          />
+        </>
+      )
+    }
+    {!noPwa && <script>if (typeof window !== 'undefined') import('../pwa')</script>}
+  </body>
+</html>
