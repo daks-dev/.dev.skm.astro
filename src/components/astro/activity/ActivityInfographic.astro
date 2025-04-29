@@ -1,0 +1,102 @@
+---
+import { getImage } from 'astro:assets';
+import { getCollection, render } from 'astro:content';
+import { twMerge } from '@daks.dev/astro.sdk';
+import { Sign } from '@daks.dev/astro.sdk/astro';
+import { Lightbox } from '@daks.dev/astro.sdk/svelte';
+
+interface Props {
+  class?: ClassValue;
+}
+
+const { class: className } = Astro.props;
+
+const collection = await getCollection('activity');
+
+const entries = await Promise.all(
+  collection.map(async (x) => {
+    const src = await getImage({
+      src: x.data.src,
+      width: 96,
+      fit: 'contain',
+      quality: 80
+    });
+    return {
+      src,
+      title: x.data.title,
+      Content: (await render(x)).Content
+    };
+  })
+);
+---
+
+<div
+  class:list={twMerge(
+    'grid grid-cols-none gap-x-4 gap-y-16',
+    'sm:grid-cols-2 lg:grid-cols-3',
+    'text-center',
+    className
+  )}>
+  {
+    entries.map(
+      ({
+        src: {
+          src,
+          attributes: { width, height }
+        },
+        title,
+        Content
+      }) => {
+        return (
+          <Lightbox
+            client:load
+            class:list={['group relative', 'flex flex-col items-center gap-4']}
+            title={title}
+            description='Строительная Компания  «Масштаб»'
+            scrollable={true}>
+            <Fragment slot='thumbnail'>
+              <Sign
+                custom='iconify ph--chat-centered-text'
+                class='top-2 left-1/2 -ml-22'
+                auto
+              />
+              <canvas
+                class:list={[
+                  'text-slate-500',
+                  'bg-current mask-contain mask-center mask-no-repeat',
+                  'hover:scale-105 hover:drop-shadow-xl',
+                  'duration-200 ease-in-out motion-safe:ready:transition-transform'
+                ]}
+                style={{
+                  maskImage: `url(${src})`
+                }}
+                {width}
+                {height}
+              />
+              <span
+                class='text-zinc-500 dark:text-zinc-400'
+                set:html={title}
+              />
+            </Fragment>
+            <section
+              class:list={[
+                'readable',
+                'frame px-12 py-5',
+                'overflow-y-auto',
+                'bg-neutral-50 text-neutral-800',
+                'rounded-xs'
+              ]}>
+              <h3
+                class='title mb-5 font-medium'
+                set:text={title}
+              />
+              <div class='sm:text-justify'>
+                <Content />
+              </div>
+            </section>
+          </Lightbox>
+        );
+      }
+    )
+  }
+</div>

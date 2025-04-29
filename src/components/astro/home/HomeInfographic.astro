@@ -2,7 +2,6 @@
 import { getImage } from 'astro:assets';
 import { getEntry } from 'astro:content';
 import { twMerge } from '@daks.dev/astro.sdk';
-import { Figure } from '@daks.dev/astro.sdk/astro';
 
 interface Props {
   class?: ClassValue;
@@ -12,47 +11,61 @@ const { class: className } = Astro.props;
 
 const data = (await getEntry('gallery', 'home'))?.data ?? [];
 const infographic = await Promise.all(
-  data.map(async (x) => ({
+  data.map(async ({ src, count, title, max }) => ({
     src: await getImage({
-      src: x.src,
-      width: 144,
+      src: src,
+      width: 96,
       fit: 'contain',
       quality: 80
     }),
-    alt: x.alt,
-    caption: x.caption,
-    max: x.max
+    count,
+    title,
+    max
   }))
 );
 ---
 
 <app-home-infographic class={twMerge('flex flex-wrap justify-around gap-8', className)}>
   {
-    infographic.map((x) => (
-      <Figure
-        src={x.src}
-        class='flex flex-col items-center gap-4'
-        custom={{
-          img: ['p-7', 'bg-slate-600 dark:bg-transparent', 'rounded-lg'],
-          caption: 'items-center gap-2',
-          title: ['order-none', 'font-normal', 'text-zinc-600 dark:text-zinc-300'],
-          count: ['order-first', 'text-4xl font-bold', 'text-zinc-500 dark:text-zinc-400']
-        }}
-        img={{
-          style: 'opacity:.25'
-        }}
-        alt={x.alt || x.caption?.title.toLowerCase()}
-        caption={x.caption}
-        data-max={x.max}
-        eager
-      />
-    ))
+    infographic.map(
+      ({
+        src: {
+          src,
+          attributes: { width, height }
+        },
+        count,
+        title,
+        max
+      }) => (
+        <div
+          class:list={['flex flex-col items-center gap-4', 'text-center']}
+          data-max={max}>
+          <canvas
+            class:list={['text-slate-500', 'bg-current mask-contain mask-center mask-no-repeat']}
+            style={{
+              maskImage: `url(${src})`,
+              opacity: 0.25
+            }}
+            {width}
+            {height}
+          />
+          <span
+            class:list={['text-4xl font-bold', 'text-zinc-500 dark:text-zinc-400']}
+            set:html={count}
+          />
+          <span
+            class='text-zinc-600 dark:text-zinc-300'
+            set:html={title}
+          />
+        </div>
+      )
+    )
   }
 </app-home-infographic>
 
 <script>
   type Info = {
-    image: HTMLImageElement;
+    image: HTMLCanvasElement;
     count: HTMLSpanElement;
     val: number;
     max: number;
@@ -66,11 +79,11 @@ const infographic = await Promise.all(
 
     constructor() {
       super();
-      this.querySelectorAll('figure').forEach((e) => {
+      this.querySelectorAll('div').forEach((e) => {
         const max = Number(e.dataset.max);
         if (max > this.max) this.max = max;
         this.info.push({
-          image: e.querySelector('img')!,
+          image: e.querySelector('canvas')!,
           count: e.querySelector('span')!,
           val: 0,
           max

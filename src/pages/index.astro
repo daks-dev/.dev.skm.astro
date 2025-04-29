@@ -10,8 +10,6 @@ import microdata from '@app/configs/microdata';
 const { email, telephone } = microdata.organization;
 
 import logo from '@assets/images/skm/logo.webp';
-import type { ImageMetadata } from 'astro';
-
 const thumb = await getImage({
   src: logo,
   width: 312,
@@ -25,22 +23,13 @@ const modal = await getImage({
   fit: 'inside',
   quality: 80
 });
-
-const classButton = [
-  'py-4 px-5',
-  'text-cyan-600 bg-white hover:bg-zinc-100 focus:ring-zinc-200',
-  'dark:text-slate-400 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:focus:ring-zinc-700',
-  'border border-zinc-300 rounded-lg',
-  'dark:border-zinc-600 dark:hover:border-zinc-600',
-  'shadow-md shadow-slate-500/20'
-];
 ---
 
 <Layout
   class='gap-4'
   title='СК «Масштаб»'
   description='Независимая строительная экспертиза в Москве • Строительная Компания  «Масштаб»'>
-  <div class:list={['frame-xl/2', 'mt-20 bp:mt-32', 'flex flex-wrap items-center']}>
+  <div class:list={['frame-xl/2', 'mt-20 mb-8 bp:mt-32', 'flex flex-wrap items-center']}>
     <header class='flex w-fit flex-col'>
       <Lightbox
         client:load
@@ -152,7 +141,7 @@ const classButton = [
   </div>
 
   <main
-    class:list={['frame/2', 'flex grow flex-col justify-around gap-y-8', 'mb-4']}
+    class:list={['frame/2', 'flex grow flex-col justify-around gap-y-4', 'mb-0']}
     itemprop='mainContentOfPage'>
     <HomeInfographic />
 

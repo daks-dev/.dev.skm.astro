@@ -1,6 +1,5 @@
 ---
-import { Img, Link, LoadingIndicator, ThemeToggleShift, ToTop } from '@daks.dev/astro.sdk/astro';
-import { SidebarToggle } from '@components/astro';
+import { Img, Link, ThemeToggleShift, ToTop } from '@daks.dev/astro.sdk/astro';
 import NavbarMenu from './NavbarMenu.astro';
 import NavbarMenuToggle from './NavbarMenuToggle.astro';
 
@@ -40,7 +39,6 @@ import logo from '@assets/images/skm/logo.navbar.webp';
           Astro.url.pathname !== '/' && (
             <Link
               href='/'
-              class='max-bp:mx-auto'
               aria-label='главная страница'
               data-astro-prefetch>
               <span
@@ -65,7 +63,8 @@ import logo from '@assets/images/skm/logo.navbar.webp';
       <NavbarMenuToggle
         custom={['iconify ph--list', 'size-6']}
         class:list={[
-          'ml-8 p-2',
+          'ml-auto',
+          'p-2',
           'text-slate-500',
           'rounded-full',
           'shadow-2xs shadow-gray-400 hover:shadow-md dark:shadow-gray-950'

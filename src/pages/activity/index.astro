@@ -1,30 +1,6 @@
 ---
-import { getImage } from 'astro:assets';
-import { getCollection, render } from 'astro:content';
-import { Figure, Sign } from '@daks.dev/astro.sdk/astro';
-import { Lightbox } from '@daks.dev/astro.sdk/svelte';
 import Layout from '@layouts/Base.astro';
-import { Header } from '@components/astro';
-
-const collection = await getCollection('activity');
-
-const entries = await Promise.all(
-  collection.map(async (x) => {
-    const src = await getImage({
-      src: x.data.src,
-      width: 160,
-      fit: 'contain',
-      quality: 80
-    });
-    return {
-      src,
-      caption: {
-        title: x.data.title
-      },
-      content: (await render(x)).Content
-    };
-  })
-);
+import { ActivityCarousel, ActivityInfographic, Header } from '@components/astro';
 
 const title = 'Деятельность';
 const description = 'Деятельность';
@@ -33,68 +9,20 @@ const description = 'Деятельность';
 <Layout
   title={`${title} • СК «Масштаб»`}
   description={`${description} • Строительная Компания  «Масштаб»`}>
-  <Header
-    class='frame/2'
-    {title}
-  />
+  <div class:list={['min-h-screen', 'flex grow flex-col']}>
+    <Header
+      class='frame/2'
+      {title}
+    />
 
-  <main
-    class='frame/2'
-    itemprop='mainContentOfPage'>
-    <div
-      class:list={[
-        'grid grid-cols-none gap-x-4 gap-y-10',
-        'sm:grid-cols-2 lg:grid-cols-3',
-        'text-center'
-      ]}>
-      {
-        entries.map((x) => {
-          const Content = x.content;
-          return (
-            <Lightbox
-              client:load
-              class='group relative'
-              custom={{ overlay: 'overflow-offset' }}
-              scrollable={true}>
-              <Fragment slot='thumbnail'>
-                <Sign
-                  custom='iconify ph--arrows-out'
-                  class='top-2 left-1/2 -ml-[72px]'
-                />
-                <Figure
-                  src={x.src}
-                  class='items-center gap-2'
-                  custom={{
-                    img: [
-                      'p-5',
-                      'rounded-lg bg-slate-600 drop-shadow-lg dark:bg-transparent',
-                      'hover:scale-105 hover:drop-shadow-xl',
-                      'transition duration-200 ease-in-out'
-                    ],
-                    caption: 'text-xl text-zinc-500 dark:text-zinc-400'
-                  }}
-                  caption={x.caption}
-                />
-              </Fragment>
-              <div
-                class:list={[
-                  'readable',
-                  'frame px-12 pt-5 pb-7',
-                  'bg-neutral-50 text-gray-800',
-                  'rounded-xs'
-                ]}>
-                <h3
-                  class='title mb-5 font-medium'
-                  set:text={x.caption.title}
-                />
-                <div class='sm:text-justify'>
-                  <Content />
-                </div>
-              </div>
-            </Lightbox>
-          );
-        })
-      }
-    </div>
-  </main>
+    <main
+      class:list={['frame/2', 'mb-0', 'flex grow flex-col justify-around']}
+      itemprop='mainContentOfPage'>
+      <ActivityInfographic />
+    </main>
+
+    <section class:list={['wrapper-xl/2 xl:px-0', 'flex h-40 items-center']}>
+      <ActivityCarousel />
+    </section>
+  </div>
 </Layout>

@@ -1,6 +1,12 @@
 ---
 import { BindCarouselData } from '@daks.dev/astro.sdk/astro';
 
+interface Props {
+  class?: ClassValue;
+}
+
+const { class: className } = Astro.props;
+
 const data = Object.values(
   import.meta.glob('@assets/images/gallery/*.(avif|gif|heic|heif|jpeg|jpg|png|tiff|webp)', {
     eager: true,
@@ -12,18 +18,24 @@ const data = Object.values(
 <BindCarouselData
   {data}
   transform={{
-    width: 320,
-    height: 180,
+    width: 192,
+    height: 144,
     fit: 'cover',
     quality: 80
   }}
-  class:list={[
-    'overflow-hidden',
-    'rounded-md lg:rounded-lg',
-    'shadow-sm shadow-zinc-500 dark:shadow-black'
-  ]}
+  class:list={['overflow-hidden', 'shadow-sm shadow-zinc-500 dark:shadow-black', className]}
+  ratio={4 / 3}
+  show={new Map([
+    [384, 2],
+    [576, 3],
+    [768, 4],
+    [960, 5],
+    [Infinity, 6]
+  ])}
+  appear={300}
   duration={20000}
-  controls=''
+  controls='play move wheel'
   stream
-  invert
+  progress
+  aria-label='реализованные проекты ск «масштаб»'
 />

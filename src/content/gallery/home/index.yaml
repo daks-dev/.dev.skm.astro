@@ -1,20 +1,17 @@
 - src: 0.png
-  caption:
-    count: '&mdash;'
-    title: Научных инженеров
+  count: '&mdash;'
+  title: Научных инженеров
   max: 25
 - src: 1.png
-  caption:
-    count: '&mdash;'
-    title: Сотрудников компании
+  count: '&mdash;'
+  title: Сотрудников компании
   max: 37
 - src: 2.png
-  caption:
-    count: '&mdash;'
-    title: Реализованных проектов
+  count: '&mdash;'
+  title: Реализованных проектов
   max: 100
 - src: 3.png
   caption:
-    count: '&mdash;'
-    title: Действующих проектов
+  count: '&mdash;'
+  title: Действующих проектов
   max: 52

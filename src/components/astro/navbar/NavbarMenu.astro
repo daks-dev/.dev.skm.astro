@@ -1,6 +1,6 @@
 ---
 import { twMerge } from '@daks.dev/astro.sdk';
-import { NavbarDropdown, Link } from '@daks.dev/astro.sdk/astro';
+import { Link } from '@daks.dev/astro.sdk/astro';
 import type { HTMLAttributes } from 'astro/types';
 import type { NavItem } from '@daks.dev/astro.sdk';
 
@@ -29,12 +29,12 @@ const { items, class: className, custom = {}, ...props } = Astro.props;
     role='menu'
     class={twMerge(
       'relative',
-      'my-1 h-8 px-3 max-bp:py-2',
+      'px-3 max-bp:pt-2 bp:my-1 bp:h-8',
       'flex max-bp:flex-col bp:gap-x-4',
       'text-base/relaxed font-normal bp:leading-none',
       'max-bp:bg-theme-frame',
       'bg-white/90 backdrop-blur-sm dark:bg-zinc-800/90',
-      'rounded-full ring-1 ring-zinc-900/10 dark:ring-white/10',
+      'ring-zinc-900/10 bp:rounded-full bp:ring-1 dark:ring-white/10',
       'shadow-lg shadow-zinc-800/10 dark:shadow-black/30',
       custom.menu,
       className
