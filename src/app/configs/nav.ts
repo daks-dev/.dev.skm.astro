@@ -26,11 +26,11 @@ export const navbar: NavItem[] = [
     href: '/articles',
     label: 'Инфрмация',
   },
+  */
   {
     href: '/news',
-    label: 'Новости',
+    label: 'Новости'
   },
-  */
   {
     href: '/contacts',
     label: 'Контакты'

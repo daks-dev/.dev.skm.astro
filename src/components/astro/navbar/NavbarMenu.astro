@@ -29,7 +29,7 @@ const { items, class: className, custom = {}, ...props } = Astro.props;
     role='menu'
     class={twMerge(
       'relative',
-      'px-3 max-bp:pt-2 bp:my-1 bp:h-8',
+      'px-3 max-bp:pt-2 bp:h-10',
       'flex max-bp:flex-col bp:gap-x-4',
       'text-base/relaxed font-normal bp:leading-none',
       'max-bp:bg-theme-frame',
@@ -67,11 +67,11 @@ const { items, class: className, custom = {}, ...props } = Astro.props;
     @apply text-sm;
     @apply text-zinc-800 dark:text-zinc-200;
   }
-  .inner[aria-current='page']::after {
+  .inner:where([aria-current='page'])::after {
     @apply content-empty;
     @apply absolute inset-x-1 -bottom-px h-px;
     @apply bg-linear-to-r;
-    @apply from-theme-active/0 via-theme-active/70 to-theme-active/0;
+    @apply from-current/0 via-current/50 to-current/0;
   }
 
   /*

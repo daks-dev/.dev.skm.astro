@@ -46,10 +46,11 @@
   --color-theme-frame: oklch(95% 0.003 270.542);
   --color-theme-inner: oklch(94% 0.003 270.542);
   --color-theme-plain: oklch(27.4% 0.006 286.033); /* -zinc-800*/
-  --color-theme-header: oklch(50% 0.01 73.577);
-  --color-theme-link: oklch(44.6% 0.043 257.281); /* -slate-600 */
-  --color-theme-link-hover: oklch(60% 0.118 184.704); /* -teal-600 */
-  --color-theme-active: oklch(60% 0.118 184.704); /* -teal-600 */
+  --color-theme-header: oklch(37% 0.013 285.805); /* -zinc-700 */
+  --color-theme-link: oklch(55.4% 0.046 257.417); /* -slate-500 */
+  --color-theme-link-hover: oklch(70.4% 0.14 182.503); /* -teal-500 */
+  --color-theme-link-page: oklch(60% 0.118 184.704); /* -teal-600 */
+  --color-theme-link-step: oklch(70.4% 0.04 256.788); /* -slate-400 */
   --color-theme-accent: oklch(59% 0.249 0.584);
 
   --navbar-height: 5rem;
@@ -62,10 +63,11 @@
   --color-theme-frame: oklch(21% 0.006 285.885); /* -zinc 900 */
   --color-theme-inner: oklch(23% 0.034 257.775);
   --color-theme-plain: oklch(96.7% 0.001 286.375); /* -zinc-100 */
-  --color-theme-header: oklch(70% 0.01 57.257);
-  --color-theme-link: oklch(55.4% 0.046 257.417); /* -slate-500 */
-  --color-theme-link-hover: oklch(77.7% 0.152 181.912); /* -teal-400 */
-  --color-theme-active: oklch(77.7% 0.152 181.912); /* -teal-400 */
+  --color-theme-header: oklch(92% 0.004 286.32); /* -zinc-200 */
+  --color-theme-link: oklch(70.4% 0.04 256.788); /* -slate-400 */
+  --color-theme-link-hover: oklch(70.4% 0.14 182.503); /* -teal-500 */
+  --color-theme-link-page: oklch(77.7% 0.152 181.912); /* -teal-400 */
+  --color-theme-link-step: oklch(70.4% 0.04 256.788); /* -slate-400 */
 }
 
 @import './base.css';

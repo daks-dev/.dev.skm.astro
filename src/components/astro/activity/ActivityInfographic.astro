@@ -57,7 +57,10 @@ const entries = await Promise.all(
             <Fragment slot='thumbnail'>
               <Sign
                 custom='iconify ph--chat-centered-text'
-                class='top-2 left-1/2 -ml-22'
+                class:list={[
+                  'top-2 left-1/2 -ml-22',
+                  'shadow-md shadow-black/40 dark:shadow-black'
+                ]}
                 auto
               />
               <canvas
