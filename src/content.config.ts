@@ -32,14 +32,18 @@ const activity = defineCollection({
 const gallery = defineCollection({
   loader: glob({ pattern: '**/*.{yml,yaml}', base: 'src/content/gallery' }),
   schema: ({ image }) =>
-      z
-        .object({
-          src: z.preprocess((val) => `./${val}`, image()),
-          alt: z.string().optional().default(''),
-          caption: z.record(z.string(), z.string()).nullish()
-        })
-        .catchall(z.union([z.string(), z.number(), z.boolean()]))
-        .array()
+    z
+      .object({
+        default: z
+          .object({
+            src: z.preprocess((val) => `./${val}`, image()),
+            alt: z.string().optional().default(''),
+            caption: z.record(z.string(), z.string()).nullish()
+          })
+          .catchall(z.union([z.string(), z.number(), z.boolean()]))
+          .array()
+      })
+      .catchall(z.union([z.string(), z.number(), z.boolean()]))
 });
 
 export const collections = {

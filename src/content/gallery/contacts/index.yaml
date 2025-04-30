@@ -1,2 +1,3 @@
-- src: 0.webp
-- src: 1.webp
+default:
+  - src: 0.webp
+  - src: 1.webp

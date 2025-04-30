@@ -11,7 +11,7 @@ const config = {
       addressRegion: 'Москва',
       addressLocality: 'Москва',
       streetAddress: 'ул.&nbsp;Малая Дмитровка, д.&nbsp;18а, стр.&nbsp;3',
-      url: '//clck.ru/33m6SM' //clck.ru/9uRC6
+      url: '//clck.ru/3LmBXQ'
     }
   }
 };

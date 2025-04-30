@@ -9,7 +9,7 @@
   @apply flex items-center;
   @apply text-zinc-800 dark:text-zinc-200;
   @apply hover:text-theme-link-hover;
-  @apply page:text-teal-500 dark:page:text-teal-400;
+  @apply page:text-theme-active;
   @apply backdrop-blur-sm outline-none select-none;
   /* @apply duration-200 motion-safe:ready:transition-colors; */
   @apply forced-colors:text-selected;

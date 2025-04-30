@@ -1,0 +1,56 @@
+---
+import { getEntry } from 'astro:content';
+import { BindLightboxData } from '@daks.dev/astro.sdk/astro';
+import { Header } from '@components/astro';
+import Layout from '@layouts/Base.astro';
+
+const data = (await getEntry('gallery', 'default'))?.data.default;
+
+const title = 'Реализованные проекты';
+const description = 'Реализованные проекты';
+---
+
+<Layout
+  title={`${title} • СК «Масштаб»`}
+  description={`${description} • Строительная Компания «Масштаб»`}>
+  <Header
+    class='frame/2'
+    {title}
+  />
+
+  <main
+    class='frame/2'
+    itemprop='mainContentOfPage'>
+    {
+      data && (
+        <BindLightboxData
+          class={['grid justify-between gap-8', 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3']}
+          options={{ behaviour: 'loop' }}
+          {data}
+          transform={{
+            thumb: {
+              width: 320,
+              height: 320,
+              fit: 'cover',
+              quality: 80
+            },
+            modal: {
+              width: 800,
+              fit: 'inside',
+              quality: 80
+            }
+          }}
+          sign={{ custom: 'iconify ph--arrows-out', class: 'top-2 left-2', dark: true }}
+          {title}
+          description='Строительная Компания «Масштаб»'
+          alt='реализованный проект строительная компания «масштаб»'
+          adaptive
+          scale
+          rounded
+          grayscale
+          shadow
+        />
+      )
+    }
+  </main>
+</Layout>

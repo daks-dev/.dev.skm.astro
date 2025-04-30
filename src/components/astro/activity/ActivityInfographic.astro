@@ -17,7 +17,7 @@ const entries = await Promise.all(
   collection.map(async (x) => {
     const src = await getImage({
       src: x.data.src,
-      width: 96,
+      width: 144,
       fit: 'contain',
       quality: 80
     });
@@ -62,10 +62,11 @@ const entries = await Promise.all(
               />
               <canvas
                 class:list={[
-                  'text-slate-500',
+                  'text-theme-link',
+                  'max-w-24',
                   'bg-current mask-contain mask-center mask-no-repeat',
-                  'hover:scale-105 hover:drop-shadow-xl',
-                  'duration-200 ease-in-out motion-safe:ready:transition-transform'
+                  'group-hover:scale-110 group-hover:text-theme-plain',
+                  'duration-200 ease-in-out motion-safe:ready:transition'
                 ]}
                 style={{
                   maskImage: `url(${src})`

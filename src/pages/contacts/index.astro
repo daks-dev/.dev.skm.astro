@@ -37,7 +37,7 @@ const geo = {
   }
 };
 
-const images = (await getEntry('gallery', 'contacts'))?.data;
+const images = (await getEntry('gallery', 'contacts'))?.data.default;
 
 const title = 'Контактная информация';
 const description = 'Контактная информация';
@@ -46,15 +46,16 @@ const description = 'Контактная информация';
 <Layout
   schema='ContactPage'
   title={`${title} • СК «Масштаб»`}
-  description={`${description} • Строительная Компания  «Масштаб»`}>
+  description={`${description} • Строительная Компания «Масштаб»`}>
   <div class:list={['frame/2', 'min-h-screen', 'flex grow flex-col']}>
     <Header {title} />
 
     <main
       class='mb-0 flex grow flex-col gap-4'
       itemprop='mainContentOfPage'>
-      <div class:list={['mb-4', 'flex justify-between gap-4 max-md:flex-col']}>
-        <ContactsData />
+      <div class:list={['mb-8', 'flex justify-between gap-4 max-md:flex-col']}>
+        <ContactsData class:list={['mb-4', 'text-theme-link']} />
+
         {
           images && (
             <BindLightboxData

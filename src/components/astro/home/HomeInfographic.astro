@@ -9,12 +9,12 @@ interface Props {
 
 const { class: className } = Astro.props;
 
-const data = (await getEntry('gallery', 'home'))?.data ?? [];
+const data = (await getEntry('gallery', 'home'))?.data.default ?? [];
 const infographic = await Promise.all(
   data.map(async ({ src, count, title, max }) => ({
     src: await getImage({
       src: src,
-      width: 96,
+      width: 144,
       fit: 'contain',
       quality: 80
     }),
@@ -41,7 +41,11 @@ const infographic = await Promise.all(
           class:list={['flex flex-col items-center gap-4', 'text-center']}
           data-max={max}>
           <canvas
-            class:list={['text-slate-500', 'bg-current mask-contain mask-center mask-no-repeat']}
+            class:list={[
+              'text-theme-link',
+              'max-w-24',
+              'bg-current mask-contain mask-center mask-no-repeat'
+            ]}
             style={{
               maskImage: `url(${src})`,
               opacity: 0.25

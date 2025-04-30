@@ -34,8 +34,8 @@ const { items, class: className, custom = {}, ...props } = Astro.props;
       'text-base/relaxed font-normal bp:leading-none',
       'max-bp:bg-theme-frame',
       'bg-white/90 backdrop-blur-sm dark:bg-zinc-800/90',
-      'ring-zinc-900/10 bp:rounded-full bp:ring-1 dark:ring-white/10',
-      'shadow-lg shadow-zinc-800/10 dark:shadow-black/30',
+      'ring-zinc-900/5 bp:rounded-full bp:ring-1 dark:ring-white/10',
+      'shadow-lg shadow-zinc-800/5 dark:shadow-black/30',
       custom.menu,
       className
     )}
@@ -65,15 +65,13 @@ const { items, class: className, custom = {}, ...props } = Astro.props;
     @apply px-3 py-2;
     @apply flex items-center;
     @apply text-sm;
-    @apply text-zinc-800 hover:text-theme-link-hover dark:text-zinc-200;
+    @apply text-zinc-800 dark:text-zinc-200;
   }
-  .inner[aria-current='page'] {
-    @apply text-teal-500 dark:text-teal-400;
-    &::after {
-      @apply content-empty;
-      @apply absolute inset-x-1 -bottom-px h-px;
-      @apply bg-linear-to-r from-teal-500/0 via-teal-500/40 to-teal-500/0 dark:from-teal-400/0 dark:via-teal-400/40 dark:to-teal-400/0;
-    }
+  .inner[aria-current='page']::after {
+    @apply content-empty;
+    @apply absolute inset-x-1 -bottom-px h-px;
+    @apply bg-linear-to-r;
+    @apply from-theme-active/0 via-theme-active/70 to-theme-active/0;
   }
 
   /*
