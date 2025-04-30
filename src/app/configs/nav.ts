@@ -40,24 +40,30 @@ export const navbar: NavItem[] = [
 export const sidebar: NavItem[] = [];
 
 export const footer: NavItem[] = [
-  /*
   {
-    href: '/admin',
-    label: 'панель администратора' // &#128736;
+    href: '/about',
+    label: 'О предприятии'
   },
+  /*
   {
     href: '/regulation',
     label: 'Регламент'
   },
-  */
   {
     href: '/permissions',
     label: 'Допуски'
   },
+  */
+  {
+    href: '/partners',
+    label: 'Партнёры'
+  }
+  /*
   {
     href: '/contacts',
     label: 'Контакты'
   }
+    */
 ];
 
 export default {

@@ -6,7 +6,7 @@
   }
 
   a {
-    @apply hover:!text-theme-link-hover;
+    @apply hover:!text-theme-link-hover step:text-theme-link-step page:text-theme-link-page;
   }
 
   h1 {

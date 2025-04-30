@@ -1,0 +1,21 @@
+---
+import { Header } from '@components/astro';
+import Layout from '@layouts/Base.astro';
+
+const title = 'СКМ • О предприятии';
+const description = 'О предприятии';
+---
+
+<Layout
+  title={`${title} • СК «Масштаб»`}
+  description={`${description} • Строительная Компания «Масштаб»`}>
+  <Header
+    class='frame/2'
+    {title}
+  />
+
+  <main
+    class='frame/2'
+    itemprop='mainContentOfPage'>
+  </main>
+</Layout>

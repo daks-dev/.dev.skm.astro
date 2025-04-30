@@ -66,6 +66,7 @@ import logo from '@assets/images/skm/logo.navbar.webp';
           'ml-auto',
           'p-2',
           'text-slate-500',
+          'bg-theme-frame scrolled-up:bg-theme-inner',
           'rounded-full',
           'shadow-2xs shadow-gray-400 hover:shadow-md dark:shadow-gray-950'
         ]}
@@ -76,8 +77,9 @@ import logo from '@assets/images/skm/logo.navbar.webp';
         class:list={[
           'flex justify-around bp:contents',
           'py-2',
-          'bg-theme-frame',
-          'border-t border-neutral-200 dark:border-neutral-700/50'
+          'max-bp:bg-theme-inner',
+          'max-bp:mx-4 max-bp:rounded-b-lg'
+          //'border-t border-neutral-200 dark:border-neutral-700/50'
         ]}>
         <ThemeToggleShift
           class='self-center justify-self-end bg-theme-flat'

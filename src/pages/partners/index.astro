@@ -1,0 +1,49 @@
+---
+import { getImage } from 'astro:assets';
+import { getEntry } from 'astro:content';
+import { Figure } from '@daks.dev/astro.sdk/astro';
+import { Header } from '@components/astro';
+import Layout from '@layouts/Base.astro';
+
+const data = (await getEntry('gallery', 'partners'))?.data.default ?? [];
+const partners = await Promise.all(
+  data.map(async ({ src, title }) => ({
+    src: await getImage({
+      src: src,
+      width: 256,
+      fit: 'contain',
+      quality: 80
+    }),
+    caption: { title: title as string }
+  }))
+);
+
+const title = 'Партнёры';
+const description = 'Партнёры';
+---
+
+<Layout
+  title={`${title} • СК «Масштаб»`}
+  description={`${description} • Строительная Компания «Масштаб»`}>
+  <Header
+    class='frame/2'
+    {title}
+  />
+
+  <main
+    class:list={[
+      'frame/2',
+      'grid justify-between gap-8',
+      'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+    ]}
+    itemprop='mainContentOfPage'>
+    {
+      partners.map(({ src, caption }) => (
+        <Figure
+          {src}
+          {caption}
+        />
+      ))
+    }
+  </main>
+</Layout>
