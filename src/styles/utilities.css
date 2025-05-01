@@ -24,18 +24,6 @@
     @apply max-sm:px-unset;
   }
 
-  :where([role='menuitem']) {
-    @apply px-3 py-2;
-    @apply flex items-center;
-    @apply text-zinc-800 dark:text-zinc-200;
-    @apply hover:text-theme-link-hover;
-    @apply page:text-theme-link-page;
-    @apply step:text-theme-link-step;
-    @apply backdrop-blur-sm outline-none select-none;
-    /* @apply duration-200 motion-safe:ready:transition-colors; */
-    @apply forced-colors:text-selected;
-  }
-
   :where(.readable) {
     @apply text-sm leading-relaxed sm:text-base;
     /* @apply bp:text-lg; */

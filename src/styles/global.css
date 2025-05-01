@@ -50,7 +50,7 @@
   --color-theme-link: oklch(55.4% 0.046 257.417); /* -slate-500 */
   --color-theme-link-hover: oklch(70.4% 0.14 182.503); /* -teal-500 */
   --color-theme-link-page: oklch(60% 0.118 184.704); /* -teal-600 */
-  --color-theme-link-step: oklch(70.4% 0.04 256.788); /* -slate-400 */
+  --color-theme-link-step: oklch(55.4% 0.046 257.417); /* -slate-500 */
   --color-theme-accent: oklch(59% 0.249 0.584);
 
   --navbar-height: 5rem;
