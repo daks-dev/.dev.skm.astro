@@ -13,20 +13,6 @@ export const navbar: NavItem[] = [
     href: '/permissions',
     label: 'Допуски'
   },
-  /*
-  {
-    href: '/partners',
-    label: 'Партнёры'
-  },
-  {
-    href: '/feedbacks',
-    label: 'Отзывы',
-  },
-  {
-    href: '/articles',
-    label: 'Инфрмация',
-  },
-  */
   {
     href: '/news',
     label: 'Новости'
@@ -44,16 +30,6 @@ export const footer: NavItem[] = [
     href: '/about',
     label: 'О предприятии'
   },
-  /*
-  {
-    href: '/regulation',
-    label: 'Регламент'
-  },
-  {
-    href: '/permissions',
-    label: 'Допуски'
-  },
-  */
   {
     href: '/partners',
     label: 'Партнёры'
@@ -61,13 +37,11 @@ export const footer: NavItem[] = [
   {
     href: '/feedbacks',
     label: 'Отзывы'
-  }
-  /*
+  },
   {
-    href: '/contacts',
-    label: 'Контакты'
+    href: '/privacy',
+    label: 'Конфиденциальность'
   }
-    */
 ];
 
 export default {
