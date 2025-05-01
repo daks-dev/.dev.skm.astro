@@ -1,5 +1,5 @@
 ---
-// import { DEV } from 'esm-env';
+import { DEV } from 'esm-env';
 import { ClientRouter } from 'astro:transitions';
 import { twMerge } from '@daks.dev/astro.sdk';
 import { Head, YandexMetrika, YandexMetrikaHit } from '@daks.dev/astro.sdk/astro';
@@ -25,8 +25,8 @@ const {
   class: className,
   title,
   description,
-  robots = 'noindex nofollow',
-  noMetrika = true, // DEV,
+  robots,
+  noMetrika = DEV,
   noPwa,
   ...props
 } = Astro.props;

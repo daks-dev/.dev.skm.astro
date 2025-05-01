@@ -1,8 +1,6 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 #
-Disallow: /
-#
 Disallow: /204
 Disallow: /403
 Disallow: /404.html
@@ -11,5 +9,7 @@ Disallow: /500.html
 Disallow: /admin
 Disallow: /search
 #
-#Sitemap: https://skm.moscow/sitemap-index.xml
+Disallow: /news/23-*
+#
+Sitemap: https://skm.moscow/sitemap-index.xml
 #
