@@ -1,3 +1,5 @@
+// import pkg from 'package.json';
+
 import app from '@app/configs/app';
 const {
   id,
