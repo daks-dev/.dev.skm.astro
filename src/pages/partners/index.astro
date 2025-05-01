@@ -10,7 +10,7 @@ const partners = await Promise.all(
   data.map(async ({ src, title }) => ({
     src: await getImage({
       src: src,
-      width: 256,
+      width: 320,
       fit: 'contain',
       quality: 80
     }),
@@ -33,14 +33,18 @@ const description = 'Партнёры';
   <main
     class:list={[
       'frame/2',
-      'grid justify-between gap-8',
-      'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+      'grid place-items-center gap-8',
+      'grid-cols-1 sm:grid-cols-2 xl:grid-cols-3'
     ]}
     itemprop='mainContentOfPage'>
     {
       partners.map(({ src, caption }) => (
         <Figure
           {src}
+          custom={{
+            img: 'min-w-3xs ring-1 ring-theme-outer',
+            caption: 'mt-1 text-sm'
+          }}
           {caption}
         />
       ))

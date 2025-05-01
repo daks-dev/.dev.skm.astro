@@ -12,7 +12,7 @@ import logo from '@assets/images/skm/logo.navbar.webp';
   id='app-navbar'
   class:list={[
     'absolute top-0 right-0 left-0 z-50 scrolled-up:fixed'
-    // 'bg-theme-frame',
+    // 'bg-theme-inner',
     // 'shadow-xs shadow-neutral-300 dark:shadow-neutral-900 onscroll:shadow-md'
     // 'border-b border-gray-100 dark:border-gray-900'
   ]}>
@@ -20,11 +20,12 @@ import logo from '@assets/images/skm/logo.navbar.webp';
     class:list={[
       'frame/2',
       'h-(--navbar-height) w-full',
-      'grid grid-cols-[1fr_auto] place-content-center gap-x-3',
-      'bp:grid-cols-[1fr_auto_1fr]'
+      'grid grid-cols-[1fr_auto] bp:grid-cols-[1fr_auto_1fr]',
+      'place-content-center items-center gap-x-3',
+      ''
     ]}>
-    <div class:list={['flex items-center justify-between', 'menu-header']}>
-      <div class='flex items-center max-bp:contents'>
+    <div class:list={['flex justify-between', 'menu-header']}>
+      <div class='flex max-bp:contents'>
         {
           /*<LoadingIndicator
           class:list={[
@@ -48,12 +49,12 @@ import logo from '@assets/images/skm/logo.navbar.webp';
               <Img
                 class:list={[
                   'drop-shadow-xs drop-shadow-black hover:drop-shadow-sm',
-                  'ready:animate-[wiggle_20s_ease-in-out_infinite]'
+                  'motion-safe:ready:animate-[wiggle_20s_ease-in-out_infinite]'
                 ]}
                 src={logo}
                 width={40}
                 height={40}
-                alt='ао ниц «строительная экспертиза»'
+                alt='строительная компания «масштаб»'
                 eager
               />
             </Link>
@@ -66,7 +67,7 @@ import logo from '@assets/images/skm/logo.navbar.webp';
           'ml-auto',
           'p-2',
           'text-slate-500',
-          'bg-theme-frame scrolled-up:bg-theme-inner',
+          'bg-theme-inner scrolled-up:bg-theme-inner',
           'rounded-full',
           'shadow-2xs shadow-gray-400 hover:shadow-md dark:shadow-gray-950'
         ]}
@@ -78,11 +79,11 @@ import logo from '@assets/images/skm/logo.navbar.webp';
           'flex justify-around bp:contents',
           'py-2',
           'max-bp:bg-theme-inner',
-          'max-bp:mx-4 max-bp:rounded-b-lg'
-          //'border-t border-neutral-200 dark:border-neutral-700/50'
+          'max-bp:mx-4 max-bp:rounded-b-lg',
+          'ring-zinc-900/10 max-bp:ring-1 dark:ring-white/10'
         ]}>
         <ThemeToggleShift
-          class='self-center justify-self-end bg-theme-flat'
+          class='justify-self-end bg-theme-inner'
           custom={{
             light: 'iconify line-md--sunny-loop',
             dark: 'iconify line-md--moon-loop',

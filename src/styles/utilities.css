@@ -18,7 +18,7 @@
 
 @layer utilities {
   :is([class*='frame']) {
-    @apply max-sm:px-[calc(1rem*var(--frame-padding,2))];
+    @apply max-sm:px-[calc(1rem*var(--inner-padding,2))];
   }
   :is([class*='wrapper']) {
     @apply max-sm:px-unset;

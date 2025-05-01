@@ -1,0 +1,29 @@
+---
+import { CardPlaceholder } from '@daks.dev/astro.sdk/astro';
+import { Header } from '@components/astro';
+import Layout from '@layouts/Base.astro';
+
+const title = 'Отзывы заказчиков';
+const description = 'Отзывы заказчиков и партнёров';
+---
+
+<Layout
+  title={`${title} • СК «Масштаб»`}
+  description={`${description} • Строительная Компания «Масштаб»`}>
+  <Header
+    class='frame/2'
+    {title}
+  />
+
+  <main
+    class:list={['frame/2', 'flex flex-wrap justify-around gap-y-8']}
+    itemprop='mainContentOfPage'>
+    {
+      [0, 1, 2, 3, 4].map(() => (
+        <CardPlaceholder
+          class:list={['w-full max-w-sm', 'snap-start odd:bg-green-700/20', 'even:bg-red-700/20']}
+        />
+      ))
+    }
+  </main>
+</Layout>

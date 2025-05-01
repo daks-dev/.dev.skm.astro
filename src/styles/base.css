@@ -2,7 +2,7 @@
   body {
     @apply leading-normal;
     /* @apply text-theme-plain; */
-    /* @apply bg-theme-flat; */
+    /* @apply bg-theme-frame; */
   }
 
   a {

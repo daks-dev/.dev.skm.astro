@@ -16,9 +16,9 @@ const currentYear = new Date().getFullYear();
 ---
 
 <footer
-  class={twMerge('frame/2 py-5', 'flex flex-col gap-y-2', className)}
+  class={twMerge('frame/2 py-5', 'flex flex-col gap-y-2', 'text-xs leading-none', className)}
   {...props}>
-  <div class:list={['flex items-center max-sm:flex-col sm:justify-between', 'text-sm']}>
+  <div class:list={['flex items-center max-sm:flex-col sm:justify-between']}>
     <div class='py-2 text-nowrap max-sm:order-last sm:mr-auto'>
       <a
         href='https://astro.build'
@@ -42,7 +42,7 @@ const currentYear = new Date().getFullYear();
         Svelte
       </a>
     </div>
-    <div class='flex gap-x-8'>
+    <div class:list={['flex gap-x-8', 'text-sm/none']}>
       {
         footer.map(({ class: classValue, role = 'menuitem', ...props }) => (
           <Link
@@ -55,13 +55,11 @@ const currentYear = new Date().getFullYear();
     </div>
   </div>
 
-  <div
-    class:list={[
-      'flex items-center justify-between gap-3',
-      'max-xs:flex-col',
-      'text-xs/none tracking-widest'
-    ]}>
-    <Timer client:idle />
+  <div class:list={['flex items-center justify-between gap-3', 'max-xs:flex-col']}>
+    <Timer
+      class='text-sm/none tracking-widest'
+      client:idle
+    />
     <span class='text-nowrap'>&copy; {currentYear} СК «Масштаб»</span>
   </div>
 </footer>

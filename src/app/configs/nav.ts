@@ -57,6 +57,10 @@ export const footer: NavItem[] = [
   {
     href: '/partners',
     label: 'Партнёры'
+  },
+  {
+    href: '/feedbacks',
+    label: 'Отзывы'
   }
   /*
   {

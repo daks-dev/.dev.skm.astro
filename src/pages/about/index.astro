@@ -1,8 +1,25 @@
 ---
+import { getImage } from 'astro:assets';
+import { getEntry } from 'astro:content';
+import { Img } from '@daks.dev/astro.sdk/astro';
 import { Header } from '@components/astro';
 import Layout from '@layouts/Base.astro';
 
-const title = 'СКМ • О предприятии';
+const data = (await getEntry('gallery', 'about'))?.data.default ?? [];
+const images = await Promise.all(
+  data.map(async ({ src, alt }) => ({
+    src: await getImage({
+      src: src,
+      width: 256,
+      fit: 'contain',
+      quality: 80
+    }),
+    alt,
+    source: src
+  }))
+);
+
+const title = 'О предприятии';
 const description = 'О предприятии';
 ---
 
@@ -15,7 +32,41 @@ const description = 'О предприятии';
   />
 
   <main
-    class='frame/2'
+    class:list={['frame/2', 'flex flex-wrap justify-center gap-8 md:flex-nowrap']}
     itemprop='mainContentOfPage'>
+    <div class:list={['readable', 'flex-auto']}>
+      <p>
+        <strong>Строительная компания «Масштаб»</strong> является достаточно молодой и перспективной
+        организацией, занимающейся контролем за соблюдением технологических процессов строительного производства,
+        включающих в себя входной контроль качества строительных материалов и продукции поступающей на
+        строительную площадку, оценку технического состояния зданий и сооружений, мониторинг объектов
+        нового строительства и окружающей застройки попадающей в геотехническую зону влияния.
+      </p>
+      <p>
+        Сотрудниками СК&nbsp;«Масштаб» являются <b>высококвалифицированные специалисты</b> с
+        <em>высшим строительным образованием</em>, а так же <b>судебно-технические эксперты</b>.
+      </p>
+    </div>
+
+    <div class:list={['mt-1 max-sm:mt-4', 'flex-none flex-col']}>
+      {
+        images.map(({ src, alt, source }, idx) => (
+          <>
+            <Img
+              {src}
+              class='ring-1 ring-theme-inner'
+              alt={alt || `строительная компания «масштаб» [${idx}]`}
+              itemprop='thumbnailURL'
+              eager
+            />
+            <link
+              href={source.src}
+              rel='image'
+              itemprop='image'
+            />
+          </>
+        ))
+      }
+    </div>
   </main>
 </Layout>
