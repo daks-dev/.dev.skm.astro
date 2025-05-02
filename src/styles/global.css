@@ -42,9 +42,9 @@
   --color-primary-900: var(--color-slate-900);
   --color-primary-950: var(--color-slate-950);
 
-  --color-theme-outer: oklch(96.7% 0.001 286.375); /* -zinc-100 */
-  --color-theme-frame: oklch(98.5% 0 0); /* -zinc-50 */
-  --color-theme-inner: oklch(96.7% 0.001 286.375); /* -zinc-200*/
+  --color-theme-outer: oklch(96% 0.001 286.375); /* -zinc-100 */
+  --color-theme-frame: oklch(98% 0 0); /* -zinc-50 */
+  --color-theme-inner: oklch(97% 0.001 286.375); /* -zinc-200*/
   --color-theme-plain: oklch(27.4% 0.006 286.033); /* -zinc-800*/
   --color-theme-header: oklch(37% 0.013 285.805); /* -zinc-700 */
   --color-theme-link: oklch(55.4% 0.046 257.417); /* -slate-500 */
