@@ -1,6 +1,6 @@
-import app from '@app/configs/app';
-
 export const prerender = true;
+
+import app from '@app/configs/app';
 
 export async function GET() {
   return new Response(
