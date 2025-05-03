@@ -62,12 +62,14 @@ const currentYear = new Date().getFullYear();
     </div>
   </div>
 
-  <div class:list={['flex items-center justify-between gap-3', 'max-xs:flex-col']}>
+  <div class:list={['grid items-center justify-items-center gap-3', 'xs:grid-cols-3']}>
     <Timer
-      class='text-sm/none tracking-widest'
+      class:list={['xs:justify-self-start', 'tracking-widest']}
       client:idle
     />
     <ApiButton custom='iconify size-4 ph--gear' />
-    <span class='text-nowrap'>&copy; {currentYear} СК «Масштаб»</span>
+    <span class:list={['xs:justify-self-end', 'text-nowrap']}>
+      &copy; {currentYear} СК «Масштаб»
+    </span>
   </div>
 </footer>
