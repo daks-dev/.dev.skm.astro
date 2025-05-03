@@ -1,0 +1,62 @@
+---
+import { twMerge } from '@daks.dev/astro.sdk';
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends Omit<HTMLAttributes<'button'>, 'class'> {
+  custom: ClassValue;
+  class?: ClassValue;
+  href?: string;
+}
+
+const {
+  custom,
+  class: className,
+  href = '/api',
+  'aria-label': ariaLabel = 'API',
+  ...props
+} = Astro.props;
+---
+
+<app-api-button data-href={new URL(href, Astro.url).href}>
+  <template>
+    <button
+      class={twMerge(className)}
+      type='button'
+      tabindex='-1'
+      aria-label={ariaLabel}
+      {...props}>
+      <span
+        class={twMerge('bg-only', custom)}
+        set:text={ariaLabel}
+      />
+    </button>
+  </template>
+</app-api-button>
+
+<script>
+  import { message } from '@app/stores';
+
+  class AppApiButton extends HTMLElement {
+    button: HTMLButtonElement;
+
+    constructor() {
+      super();
+      this.appendChild(this.querySelector('template')!.content.cloneNode(true));
+      this.button = this.querySelector('button')!;
+    }
+
+    connectedCallback() {
+      this.button.addEventListener('click', this.handle);
+    }
+
+    // disconnectedCallback() {}
+
+    handle = async (e: Event) => {
+      if (e.cancelable) e.preventDefault();
+      const json = await fetch(this.dataset.href!).then((x) => x.json());
+      message.set(`API: ${json.data}`);
+    };
+  }
+
+  customElements.define('app-api-button', AppApiButton);
+</script>

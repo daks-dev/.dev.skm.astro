@@ -1,6 +1,7 @@
 ---
 import { twMerge } from '@daks.dev/astro.sdk';
 import { Icon, Link } from '@daks.dev/astro.sdk/astro';
+import { ApiButton } from '@components/astro';
 import { Timer } from '@components/svelte';
 import type { HTMLAttributes } from 'astro/types';
 
@@ -48,7 +49,7 @@ const currentYear = new Date().getFullYear();
         Svelte
       </a>
     </div>
-    <div class:list={['flex flex-wrap gap-x-4']}>
+    <div class='flex flex-wrap justify-center gap-x-4'>
       {
         footer.map(({ class: classValue, role = 'menuitem', ...props }) => (
           <Link
@@ -66,6 +67,7 @@ const currentYear = new Date().getFullYear();
       class='text-sm/none tracking-widest'
       client:idle
     />
+    <ApiButton custom='iconify size-4 ph--gear' />
     <span class='text-nowrap'>&copy; {currentYear} СК «Масштаб»</span>
   </div>
 </footer>

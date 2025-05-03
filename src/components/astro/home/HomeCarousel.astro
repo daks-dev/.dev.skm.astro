@@ -1,12 +1,14 @@
 ---
+import { getEntry } from 'astro:content';
 import { BindCarouselData } from '@daks.dev/astro.sdk/astro';
 
-const data = Object.values(
-  import.meta.glob('@assets/images/gallery/*.(avif|gif|heic|heif|jpeg|jpg|png|tiff|webp)', {
-    eager: true,
-    import: 'default'
-  })
-).map((x) => ({ src: x as ImageMetadata }));
+interface Props {
+  class?: ClassValue;
+}
+
+const { class: className } = Astro.props;
+
+const data = (await getEntry('gallery', 'default'))?.data.default ?? [];
 ---
 
 <BindCarouselData
@@ -21,8 +23,10 @@ const data = Object.values(
   class:list={[
     'overflow-hidden',
     'rounded-md lg:rounded-lg',
-    'shadow-sm shadow-zinc-500 dark:shadow-black'
+    'shadow-sm shadow-zinc-500 dark:shadow-black',
+    className
   ]}
+  ratio={16 / 9}
   appear={300}
   duration={20000}
   controls=''

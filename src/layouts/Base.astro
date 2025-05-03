@@ -3,7 +3,7 @@ import { DEV } from 'esm-env';
 import { ClientRouter } from 'astro:transitions';
 import { twMerge } from '@daks.dev/astro.sdk';
 import { Head, YandexMetrika, YandexMetrikaHit } from '@daks.dev/astro.sdk/astro';
-import { Navbar, /*Sidebar,*/ Footer } from '@components/astro';
+import { Navbar, Footer, Toast } from '@components/astro';
 import type { HTMLAttributes } from 'astro/types';
 
 import '@assets/fonts/roboto/cyrillic.css';
@@ -91,8 +91,14 @@ const fonts: string[] = Object.values(
       {...props}>
       <slot />
       <Navbar />
-      {/*<Sidebar />*/}
       <Footer />
+      <Toast
+        class:list={[
+          'rounded-sm ring-1 ring-theme-inner',
+          'text-sm tracking-wider',
+          'bg-theme-frame/90'
+        ]}
+      />
     </div>
     {
       !noMetrika && (

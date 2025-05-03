@@ -1,4 +1,5 @@
 ---
+import { getEntry } from 'astro:content';
 import { BindCarouselData } from '@daks.dev/astro.sdk/astro';
 
 interface Props {
@@ -7,12 +8,7 @@ interface Props {
 
 const { class: className } = Astro.props;
 
-const data = Object.values(
-  import.meta.glob('@assets/images/gallery/*.(avif|gif|heic|heif|jpeg|jpg|png|tiff|webp)', {
-    eager: true,
-    import: 'default'
-  })
-).map((x) => ({ src: x as ImageMetadata }));
+const data = (await getEntry('gallery', 'default'))?.data.default ?? [];
 ---
 
 <BindCarouselData
