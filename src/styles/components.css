@@ -1,3 +1,5 @@
+@import '@daks.dev/astro.sdk/tailwind/components/lightbox.css';
+
 @layer components {
   :where(main, [role='main']) {
     margin-bottom: auto;

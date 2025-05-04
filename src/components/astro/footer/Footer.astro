@@ -49,7 +49,9 @@ const currentYear = new Date().getFullYear();
         Svelte
       </a>
     </div>
-    <div class='flex flex-wrap justify-center gap-x-4'>
+    <div
+      class='flex flex-wrap justify-center gap-x-4'
+      role='menu'>
       {
         footer.map(({ class: classValue, role = 'menuitem', ...props }) => (
           <Link

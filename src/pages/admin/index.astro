@@ -1,0 +1,39 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '@layouts/Base.astro';
+import { Header } from '@components/astro';
+
+export const prerender = true;
+
+const title = 'Панель администратора';
+const description = 'Панель администратора';
+---
+
+<Layout
+  title={`${title} • СК «Масштаб»`}
+  description={`${description} • Строительная Компания «Масштаб»`}
+  robots='no-index, follow'
+  noMetrika>
+  <Header
+    class='frame/2'
+    {title}>
+    <Image
+      class:list={[
+        'w-full max-w-xs self-center',
+        'drop-shadow-lg drop-shadow-gray-500 dark:drop-shadow-gray-700'
+      ]}
+      src='/assets/icons/astro.svg'
+      width={128}
+      height={128}
+      alt=''
+    />
+  </Header>
+
+  <main
+    class='frame/2'
+    itemprop='mainContentOfPage'>
+    <header>
+      <h1 class='text-center text-3xl'>• {title} •</h1>
+    </header>
+  </main>
+</Layout>

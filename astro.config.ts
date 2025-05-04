@@ -89,7 +89,7 @@ export default defineConfig({
     mdx(),
 
     sitemap({
-      filter: (x) => !/\/(204|403|news\/23-)/.test(x),
+      filter: (x) => !/\/(204|403|admin|search|news\/23-)/.test(x),
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date()

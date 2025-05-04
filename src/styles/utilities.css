@@ -1,4 +1,4 @@
-@import '@daks.dev/astro.sdk/tailwind/css/readable.css';
+@import '@daks.dev/astro.sdk/tailwind/utilities/readable.css';
 
 @utility min-h--screen-navbar {
   min-height: calc(100vh - var(--navbar-height));
