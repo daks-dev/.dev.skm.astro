@@ -17,7 +17,7 @@ const {
 } = Astro.props;
 ---
 
-<app-api-button data-href={new URL(href, Astro.url).href}>
+<app-api-button data-href={href}>
   <template>
     <button
       class={twMerge(className)}
